@@ -1,0 +1,228 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  background: url('../assets/background.png') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2); /* Adjust opacity (0.5) for darkness */
+  z-index: -1; /* Places the overlay behind the content */
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+}
+
+.hamburger {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+}
+
+.logo img {
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Sidebar Styles */
+.primary-nav {
+  height: 100%;
+  width: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.primary-nav a {
+  padding: 15px 30px;
+  text-decoration: none;
+  font-size: 24px;
+  color: #eaeef1;
+  display: block;
+  transition: 0.3s;
+}
+
+.primary-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.primary-nav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  font-size: 36px;
+  color: #ffffff;
+}
+
+.sidebar {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+/* Content Styles */
+.content {
+  padding: 100px;
+  text-align: center;
+}
+
+.content h1 {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-family: cursive;
+}
+
+.content h5 {
+  font-family: cursive;
+  font-weight: regular;
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+/* Button Styles */
+.buttons {
+  margin-top: 50px;
+}
+
+.buttons button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 20px 30px;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+  transition: all 0.3s ease;
+  line-height: 150%;
+}
+
+.buttons button:hover {
+  background-color: #ffffff;
+  color: #000;
+}
+
+/* background-color: rgba(232, 182, 0, 0.8); */
+
+/* Floating Button - Sleek, Glassmorphic Look */
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #ffcc00, #ff8800);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #ff8800, #ff5500);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Team Info Modal - Glassmorphism Effect */
+.team-info-modal {
+  position: fixed;
+  width: 18rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  z-index: 1000;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Team Info Content */
+.team-info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.team-info-content h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* Animated Close Button */
+.close-btn {
+  background: linear-gradient(135deg, #ff4444, #cc0000);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 25px;
+  height: 2.5rem;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.close-btn:hover {
+  background: linear-gradient(135deg, #cc0000, #990000);
+  transform: scale(1.1);
+}
+
+/* Smooth Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -55%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

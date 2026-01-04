@@ -1,0 +1,19 @@
+.export-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.expand-btn, .export-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.expand-btn:hover, .export-btn:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,274 @@
+/* Select Characters Styling */
+.character-selection {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 600px;
+  font-family: 'Arial', sans-serif;
+}
+
+.dropdown-group {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.save-button {
+  padding: 10px 20px;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+#userCharacter,
+#aiCharacter {
+  height: 35px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: block;
+  font-size: 16px;
+}
+
+/* Chat Messages Styling */
+.Big-text {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+}
+
+.Small-text {
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+.Small-text span {
+  background-color: #ddd;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 20px auto;
+  padding: 30px;
+  /* background-color: #f9f9f9; */
+  /* border: 2px solid #ddd; */
+  border-radius: 10px;
+  width: 80%;
+  font-family: 'Arial', sans-serif;
+}
+
+.chat-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  max-width: 80%;
+  padding: 15px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.user {
+  align-self: flex-end;
+  background-color: bisque;
+  color: brown;
+  font-family: 'Arial', sans-serif;
+}
+
+.ai {
+  align-self: flex-start;
+  background-color: rgb(219, 254, 251);
+  color: #004e82;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Character Info Styling */
+.character-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-right: 10px;
+}
+
+.character-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.character-name {
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Dialogue Input */
+.dialogue-input {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+}
+
+.dialogue-input textarea {
+  flex-grow: 1;
+  height: 50px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 18px;
+  resize: none;
+}
+
+.Send {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  color: black;
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.popup-buttons button {
+  margin: 5px ;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #00897b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.popup-buttons button:hover {
+  background-color: #00796b;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  color: gray;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.popup-close:hover {
+  color: #00897b;
+}
+
+/* Button Group Styling */
+.bb {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.bb button {
+  background-color: #00897b;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.bb button:hover {
+  background-color: #00796b;
+  transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bb {
+    flex-direction: column;
+    align-items: center;
+  }
+  .bb button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Animation waiting AI */
+.loading-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.loading-dots span {
+  width: 8px;
+  height: 8px;
+  background-color: #ccc;
+  border-radius: 50%;
+  animation: blink 1.5s infinite ease-in-out;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}

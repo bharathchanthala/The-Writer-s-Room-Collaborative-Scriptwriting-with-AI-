@@ -1,0 +1,556 @@
+/* Write.css */
+.write-page {
+  min-height: 100vh;
+  background: url('../assets/background.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: none;
+  border-bottom: 1px solid none;
+}
+
+.save-message {
+  background-color: #e0ffe0;
+  color: #2e7d32;
+  padding: 10px;
+  border: 1px solid #2e7d32;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 1rem;
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  background-color: #4b5563;
+}
+
+.logo {
+  height: 40px;
+}
+
+.logo img {
+  height: 100%;
+  width: auto;
+}
+
+.title-container {
+  padding: 1rem;
+}
+
+.title-container h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.content-wrapper {
+  font-family: cursive;
+  display: flex;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 16rem;
+  background-color: rgba(9, 12, 17, 0.54);
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: azure;
+}
+
+.back-button:hover {
+  background-color: #f3f4f6;
+}
+
+.back-icon {
+  margin-right: 0.5rem;
+}
+
+.script-container {
+  max-width: 60rem;
+  margin: 0 auto;
+  background-color: rgb(253, 243, 229);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  /* new */
+  overflow-y: auto;
+  background-image: linear-gradient(
+      90deg,
+      rgb(253, 243, 229) 12px,
+      0,
+      #381b04 15px,
+      0,
+      #654e0f 20px,
+      0,
+      rgb(253, 243, 229) 100%
+    ),
+    radial-gradient(circle closest-side, rgba(255, 255, 255, 0) 88%, rgb(253, 243, 229) 100%),
+    radial-gradient(circle at 22px 8px, #654e0f 0%, #7d5c27 40%, #803816 100%);
+  background-size: 32px 8px, 32px 16px, 32px 16px; /* Paper texture pattern */
+  background-repeat: space no-repeat;
+  background-position: center top, center 6px, center 6px;
+}
+
+.script-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.story-section {
+  background-color: rgb(253, 243, 229);
+  padding: 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.speaker-name {
+  font-weight: bold;
+  min-width: 120px; /* Adjust based on your design */
+  text-align: right;
+  white-space: nowrap; /* Prevents name from wrapping */
+}
+.speaker-name span {
+  font-weight: 700;
+  font-size: large;
+  color: #2452b5;
+}
+
+/* dialogue */
+
+.dialogue-section {
+  font-size: medium;
+  font-weight: 600;
+}
+
+.dialogue-line {
+  display: flex;
+  align-items: start;
+  gap: 1rem; /* Space between character name and dialogue */
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Dialogue Text Container */
+.dialogue-text-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Dialogue Text Base */
+.dialogue-text {
+  flex: 1; /* Allows dialogue to take up remaining space */
+  max-width: 100%;
+  min-width: 200px; /* Ensures some width */
+  min-height: 1em; /* Set a minimum height to prevent shrinking */
+
+  padding: 0.5rem;
+  color: #374151;
+  font-family: 'Georgia', serif;
+  font-weight: 600;
+  display: inline-block; /* Prevents it from stretching */
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Focus States */
+.dialogue-text:focus {
+  border: 1px solid #2563eb; /* Exactly 1px border when focused */
+  background-color: #fff;
+  border-radius: 0.375rem;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+.dialogue-section .dialogue-line .dialogue-text-wrapper .dialogue-text:focus {
+  border: 1px solid #2563eb !important;
+}
+
+/* Edit Mode States */
+.dialogue-text-wrapper .dialogue-text.edit-mode,
+.dialogue-text-wrapper .dialogue-text:focus,
+.is-in-edit-mode .dialogue-text {
+  background-color: whitesmoke;
+  border: 1px solid #1d4ed8;
+  border-radius: 4px;
+  padding: 8px;
+  min-height: 2em;
+}
+
+/* (Parent) When in edit mode, always show border/background */
+.is-in-edit-mode {
+  position: relative;
+}
+
+/* Enhanced styling for text in parent edit mode */
+.is-in-edit-mode .dialogue-text-wrapper .dialogue-text {
+  background-color: whitesmoke;
+  border: 1px solid #1d4ed8;
+  border-radius: 4px;
+  padding: 8px;
+  margin-top: 0;
+
+  /* Make the dialogue text height match the dropdown */
+  min-height: 38px; /* Match height with select dropdown */
+  display: flex;
+  align-items: center;
+}
+
+.dialogue-actions {
+  display: flex;
+  /* flex-wrap: wrap; */
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  position: relative;
+  width: 100%;
+}
+
+.dialogue-actions button {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dialogue-actions button:hover {
+  background-color: #e5e7eb;
+}
+
+.dialogue-actions .remove-btn {
+  color: #dc2626 !important; /* Red color for remove button */
+  font: 16px;
+  font-weight: normal;
+  width: 5rem;
+}
+
+.dialogue-actions .remove-btn:hover {
+  background-color: #fee2e2; /* Light red background on hover */
+}
+
+/* Character Selection Dropdown */
+.dialogue-text-wrapper select,
+.speaker-name select {
+  width: 100%;
+  padding: 8px 12px;
+  padding-right: 28px; /* Increase right padding to create more space for the arrow */
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  appearance: none;
+  /* the polytriangle */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 12px top 50%;
+  background-size: 12px auto;
+  transition: all 0.2s;
+
+  margin-top: 0; /* Remove top margin */
+  margin-bottom: 0; /* Remove bottom margin */
+}
+
+.dialogue-text-wrapper select:hover,
+.speaker-name select:hover {
+  border-color: #4361ee;
+}
+
+.dialogue-text-wrapper select:focus,
+.speaker-name select:focus {
+  border-color: #3949ab;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.2);
+}
+
+/* Ensure edit mode is clearly visible when new dialogue is added */
+.new-dialogue .dialogue-text {
+  background-color: whitesmoke !important;
+  border: 1px solid #1d4ed8 !important;
+}
+
+.dialogue-text .no-scroll :active {
+  border: 0.1px !important;
+}
+
+.dialogue-text:focus {
+  border: 0.1px !important;
+}
+
+.story-text {
+  color: #4b5563;
+  line-height: 1.625;
+  margin-bottom: 0.2rem;
+}
+
+.speaker-name {
+  min-width: auto;
+  display: flex;
+  margin-top: 4.5px;
+}
+
+/* buttons */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.download-button,
+.copy-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: white;
+}
+
+.download-button {
+  background-color: #2563eb;
+}
+
+.download-button:hover {
+  background-color: #1d4ed8;
+}
+
+.copy-button {
+  background-color: #4b5563;
+}
+
+.copy-button:hover {
+  background-color: #374151;
+}
+
+@media (max-width: 640px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .dialogue-line {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+}
+
+/* Summary */
+
+.summary-block {
+  background-color: #f4f4f4, 60;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.summary-block h2 {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  color: white;
+}
+.summary-block p {
+  margin: 4px 0;
+  color: white;
+}
+
+/* co-write button hover */
+.co-write-button {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.co-write-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #0056b3;
+}
+
+/*CSS for word count section*/
+.word-count {
+  text-align: right;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+/* Ensure the no-scroll class works properly */
+.no-scroll {
+  overflow: visible;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Add this important rule to fix potential React rendering issues */
+.dialogue-line,
+.dialogue-text-wrapper,
+.dialogue-text {
+  box-sizing: border-box;
+}
+.placeholder {
+  color: #aaa; /* light gray to mimic placeholder */
+  pointer-events: none;
+}
+
+.custom-undo-button {
+  background-color: #1976d2;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: none;
+  margin-right: 10px;
+  text-transform: none !important;
+}
+
+.custom-undo-button:hover {
+  background-color: #1565c0;
+}
+
+.custom-redo-button {
+  background-color: #43a047;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: none;
+  text-transform: none !important;
+}
+
+.custom-redo-button:hover {
+  background-color: #36539d;
+}
+
+/* Button Shift when sidebar opens */
+.undo-redo-buttons {
+  transition: transform 0.1s ease-in-out;
+}
+
+.menu-open .undo-redo-buttons {
+  transform: translateX(300px);
+}
+
+.fixed-summary {
+  position: fixed;
+  z-index: 0;
+}
+
+/* Default state */
+.summary-block.fixed-summary {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 250px;
+  min-width: 250px;
+  max-width: 300px;
+  padding: 16px;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 10;
+  transition: margin-left 0.3s ease;
+}
+
+/* When sidebar is open, push summary block to the right */
+.summary-block.fixed-summary.with-sidebar {
+  margin-left: 1rem; /* same as .sidebar width = 16rem */
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+  margin-left: 16px;
+  margin-right: 16px;
+  overflow-y: auto;
+  max-width: calc(100% - 250px - 32px); /* Adjust width based on sidebar and margins */
+  box-sizing: border-box;
+  position: relative; /* Needed for positioning the pseudo-element */
+  border-radius: 6px; /* Rounded corners for the main content */
+  z-index: 2; /* Ensures content stays on top of the "paper" background */
+}
+
+.main-content p {
+  font-family: 'Georgia', serif; /* More artistic, elegant font for paper-like style */
+  line-height: 1.6;
+}
+
+.undo-redo-buttons.fixed-undo-redo {
+  position: fixed;
+  z-index: 10;
+  bottom: 60px;
+  left: 40px;
+  display: flex;
+  gap: 15px;
+}

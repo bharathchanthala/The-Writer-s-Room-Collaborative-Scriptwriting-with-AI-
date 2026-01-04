@@ -1,0 +1,16 @@
+.conversation {
+    font-family: Arial, sans-serif;
+  }
+  
+  .entry {
+    margin: 15px 0;
+  }
+  
+  .entry .eli {
+    color: #007BFF; /* Blue for Eli */
+  }
+  
+  .entry .lila {
+    color: #FF4500; /* Red-Orange for Lila */
+  }
+  
