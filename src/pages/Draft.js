@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './Draft.css';
 import logo from '../assets/titlelogo.png';
 import { Link } from 'react-router-dom';
 import { updateScript } from '../stores/stores';
 import { LoadingButton } from '@mui/lab';
 import Flash from '../components/Flash';
+import {generateStory} from "../services/generate-story";
 
 const Draft = () => {
   const [draftText, setDraftText] = useState('');
@@ -77,13 +77,7 @@ const Draft = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://gammaweb06.medien.uni-weimar.de:8000/generate_complete_story', {
-        setting: draftText
-      });
-
-      console.log('Response from backend:', response.data);
-
-      const data = await response.data;
+      const data = await generateStory(draftText);
 
       const {
         initial_scene_heading,
@@ -115,6 +109,8 @@ const Draft = () => {
     } catch (error) {
       console.error('Error sending draft to backend:', error);
       alert('Failed to process draft. Please try again.');
+            setLoading(false);
+
     }
   };
 
