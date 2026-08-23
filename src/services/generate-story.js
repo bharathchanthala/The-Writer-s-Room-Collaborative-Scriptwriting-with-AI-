@@ -7,6 +7,7 @@ export const generateStory = async (setting) => {
   const response = await axios.post(STORY_API_URL, {
     setting,
   });
+  console.log (response.data);
 
   return response.data;
 };

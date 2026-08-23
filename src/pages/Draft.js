@@ -78,7 +78,7 @@ const Draft = () => {
 
     try {
       const data = await generateStory(draftText);
-
+     
       const {
         initial_scene_heading,
         initial_scene_description,
@@ -86,6 +86,8 @@ const Draft = () => {
         ending_scene_heading,
         ending_scene_description
       } = data;
+
+      console.log(data);
 
       dispatch(
         updateScript({

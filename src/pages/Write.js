@@ -40,18 +40,18 @@ const Write = () => {
   const navigate = useNavigate();
   const [hasInserted, setHasInserted] = useState(false);
 
-  const openingSceneScript = useSelector((state) => state.script.script);
+  const openingSceneScript = useSelector((state) => state.script);
   // TOOD: update this variable naming later
-  const intialSceneHeading = useSelector((state) => state.script.script.initialSceneHeading);
-  const charactersFromStore = useSelector((state) => state.script.script.characters);
-  const dialogueScript = useSelector((state) => state.script.script.conversation);
-  // const sceneScript = useSelector((state) => state.script.script.scene);
-  const endingSceneHeading = useSelector((state) => state.script.script.endingSceneHeading);
-  const closingSceneScript = useSelector((state) => state.script.script.endingSceneDescription);
-  // const mainBody = useSelector((state) => state.script.script.mainBodyVersions[state.script.script.currentMainBodyVersion]
+  const intialSceneHeading = useSelector((state) => state.script.initialSceneHeading);
+  const charactersFromStore = useSelector((state) => state.script.characters);
+  const dialogueScript = useSelector((state) => state.script.conversation);
+  // const sceneScript = useSelector((state) => state.script.scene);
+  const endingSceneHeading = useSelector((state) => state.script.endingSceneHeading);
+  const closingSceneScript = useSelector((state) => state.script.endingSceneDescription);
+  // const mainBody = useSelector((state) => state.script.mainBodyVersions[state.script.currentMainBodyVersion]
   // );
-  const mainBodyVersions = useSelector((state) => state.script.script.mainBodyVersions);
-  const currentMainBodyVersion = useSelector((state) => state.script.script.currentMainBodyVersion);
+  const mainBodyVersions = useSelector((state) => state.script.mainBodyVersions);
+  const currentMainBodyVersion = useSelector((state) => state.script.currentMainBodyVersion);
 
   const mainBody = useMemo(() => {
     return mainBodyVersions[currentMainBodyVersion] || [];
@@ -78,8 +78,8 @@ const Write = () => {
     forceRender((prev) => prev + 1);
   }, [mainBody]);
 
-  // const mainBodyVersions = useSelector((state) => state.script.script.mainBodyVersions);
-  // const currentMainBodyVersion = useSelector((state) => state.script.script.currentMainBodyVersion);
+  // const mainBodyVersions = useSelector((state) => state.script.mainBodyVersions);
+  // const currentMainBodyVersion = useSelector((state) => state.script.currentMainBodyVersion);
 
   // const handleTitleChange = (newTitle) => {
   //   // Update the state or store with the new title
