@@ -1,171 +1,222 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import cloneDeep from 'lodash/cloneDeep';
 
-// Initial state for script object
 const initialState = {
-  
-    initial_story: '',
-    characters: [],
-    conversation: [],
-    endingScene: '',
-    setting: '',
-    initialSceneHeading: '',
+  initial_story: '',
+  characters: [],
+  conversation: [],
+  endingScene: '',
+  setting: '',
+  initialSceneHeading: '',
+  mainBody: [],
+  endingSceneHeading: '',
+  endingSceneDescription: '',
+  Narratives: [],
 
-    // Initialize with an empty array as the first version
-    mainBodyVersions: {}, // Use array instead of object for easier management
-    currentMainBodyVersion: 0,
-    totalVersions: 1, // Track total versions for redo functionality
-
-    endingSceneHeading: '',
-    endingSceneDescription: '',
-
-    // New stuff
-    Narratives: []
-  
+  // Undo / Redo
+  versions: [],
+  currentVersion: 0,
 };
 
-// Create Redux slice for script management
+
+// Create a clean screenplay snapshot.
+// History itself is NOT included inside the snapshot.
+const createSnapshot = (state) => ({
+  initial_story: state.initial_story,
+  characters: cloneDeep(state.characters),
+  conversation: cloneDeep(state.conversation),
+  endingScene: state.endingScene,
+  setting: state.setting,
+  initialSceneHeading: state.initialSceneHeading,
+  mainBody: cloneDeep(state.mainBody),
+  endingSceneHeading: state.endingSceneHeading,
+  endingSceneDescription: state.endingSceneDescription,
+  Narratives: cloneDeep(state.Narratives),
+});
+
+
+// Save a new version
+const saveSnapshot = (state) => {
+  const nextVersion = state.currentVersion + 1;
+
+  // Remove redo history if user edits after undo
+  state.versions = state.versions.slice(0, nextVersion);
+
+  state.versions.push(createSnapshot(state));
+
+  state.currentVersion = nextVersion;
+};
+
+
+// Restore a screenplay snapshot
+const applySnapshot = (state, snapshot) => {
+  Object.assign(state, cloneDeep(snapshot));
+};
+
+
 const scriptSlice = createSlice({
   name: 'script',
+
   initialState,
+
   reducers: {
+
+    // Initial screenplay from Settings / Draft
     updateScript: (state, action) => {
-     Object.assign ( state,action.payload);              //Object.assign(target, source);  as: Take the properties from source and put them inside target.
+      Object.assign(state, action.payload);
+
+      // Start history with the initial screenplay
+      state.versions = [createSnapshot(state)];
+      state.currentVersion = 0;
     },
-    updateDialogScript: (state, action) => {
-      state.conversation.push(action.payload);
-    },
-    // TODO: review this later - this is just for testing purpose, need to optimise this later
-    updateDialogScriptSomething: (state, action) => {
-      state.conversation = action.payload;
-    },
-    updateSceneScript: (state, action) => {
-      state.scene = action.payload;
-    },
-    upateEndingScene: (state, action) => {
-      state.endingScene = action.payload;
-    },
+
+
+    // Main body changed
     updateMainBody: (state, action) => {
-      const currentVersion = state.currentMainBodyVersion;
+      state.mainBody = cloneDeep(action.payload);
 
-      // Fix the path - use state.mainBodyVersions instead of state.mainBodyVersions
-      // if (!Array.isArray(state.mainBodyVersions)) {
-      //   // Initialize it as an array if it's not already
-      //   state.mainBodyVersions = [];
-      // }
-
-      // Remove any future versions that would be lost when making a new change after undoing
-      // state.mainBodyVersions = state.mainBodyVersions.slice(0, currentVersion + 1);
-
-      // Add the new version
-      state.mainBodyVersions[currentVersion + 1] = action.payload;
-      // state.mainBodyVersions = cloneDeep(state.mainBodyVersions);
-
-      // Update current version pointer
-      state.currentMainBodyVersion = Object.keys(state.mainBodyVersions).length - 1;
-      state.totalVersions = state.mainBodyVersions.length;
+      saveSnapshot(state);
     },
 
-    updateOpeningSceneHeading: (state, action) => {
-      const currentVersion = state.currentMainBodyVersion;
 
-      // Remove any future versions that would be lost when making a new change after undoing
-      // state.mainBodyVersions = state.mainBodyVersions.slice(0, currentVersion + 1);
-
-      const _mainBodyVersions = cloneDeep(state.mainBodyVersions);
-      _mainBodyVersions[currentVersion].forEach(mb => {
-        if (mb.label === 'openingScene') {
-          mb.heading = action.payload
-        }
-      });
-      console.log('_mainBodyVersions: ', _mainBodyVersions);
-
-      // Add the new version
-      state.mainBodyVersions[currentVersion + 1] = _mainBodyVersions[0];
-      state.mainBodyVersions = cloneDeep(state.mainBodyVersions);
-
-      // Update current version pointer
-      state.currentMainBodyVersion = Object.keys(state.mainBodyVersions).length - 1;
-      state.totalVersions = state.mainBodyVersions.length;
-    },
-
-    updateOpeningSceneText: (state, action) => {
-      const currentVersion = state.currentMainBodyVersion;
-
-      // Remove any future versions that would be lost when making a new change after undoing
-      state.mainBodyVersions = state.mainBodyVersions.slice(0, currentVersion + 1);
-
-      const _mainBodyVersions = cloneDeep(state.mainBodyVersions);
-      _mainBodyVersions[currentVersion].forEach(mb => {
-        if (mb.label === 'openingScene') {
-          mb.text = action.payload
-        }
-      });
-      console.log('_mainBodyVersions: ', _mainBodyVersions);
-
-      // Add the new version
-      state.mainBodyVersions.push(_mainBodyVersions);
-      state.mainBodyVersions = cloneDeep(state.mainBodyVersions);
-
-      // Update current version pointer
-      state.currentMainBodyVersion = state.mainBodyVersions.length - 1;
-      state.totalVersions = state.mainBodyVersions.length;
-    },
-
-    undoMainBody: (state) => {
-      const currentVersion = state.currentMainBodyVersion;
-      if (currentVersion > 0) {
-        state.currentMainBodyVersion = currentVersion - 1;
-        state.mainBody = state.mainBodyVersions[state.currentMainBodyVersion];
-      }
-    },
-
-    redoMainBody: (state) => {
-      const currentVersion = state.currentMainBodyVersion;
-      if (currentVersion + 1 < Object.keys(state.mainBodyVersions).length) {
-        state.currentMainBodyVersion = currentVersion + 1;
-        state.mainBody = state.mainBodyVersions[state.currentMainBodyVersion];
-      }
-    },
-
-    updateInitialStory: (state, action) => {
-      state.initial_story = action.payload;
-    },
-    updateEndingScene: (state, action) => {
-      state.endingSceneDescription = action.payload;
-    },
+    // Opening scene heading
     updateInitialSceneHeading: (state, action) => {
       state.initialSceneHeading = action.payload;
+
+      saveSnapshot(state);
     },
+
+
+    // Opening scene text
+    updateInitialStory: (state, action) => {
+      state.initial_story = action.payload;
+
+      saveSnapshot(state);
+    },
+
+
+    // Closing scene heading
     updateEndingSceneHeading: (state, action) => {
       state.endingSceneHeading = action.payload;
-    }
-  }
+
+      saveSnapshot(state);
+    },
+
+
+    // Closing scene text
+    updateEndingScene: (state, action) => {
+      state.endingSceneDescription = action.payload;
+
+      saveSnapshot(state);
+    },
+
+
+    // Add dialogue / conversation
+    updateDialogScript: (state, action) => {
+      state.conversation.push(action.payload);
+
+      saveSnapshot(state);
+    },
+
+
+    // Replace conversation
+    updateDialogScriptSomething: (state, action) => {
+      state.conversation = cloneDeep(action.payload);
+
+      saveSnapshot(state);
+    },
+
+
+    // Scene update
+    updateSceneScript: (state, action) => {
+      state.scene = cloneDeep(action.payload);
+
+      saveSnapshot(state);
+    },
+
+
+    // Ending scene legacy action
+    upateEndingScene: (state, action) => {
+      state.endingScene = action.payload;
+
+      saveSnapshot(state);
+    },
+
+
+    // Opening scene heading legacy action
+    updateOpeningSceneHeading: (state, action) => {
+      state.initialSceneHeading = action.payload;
+
+      saveSnapshot(state);
+    },
+
+
+    // Opening scene text legacy action
+    updateOpeningSceneText: (state, action) => {
+      state.initial_story = action.payload;
+
+      saveSnapshot(state);
+    },
+
+
+    // Undo
+    undoMainBody: (state) => {
+      if (state.currentVersion <= 0) {
+        return;
+      }
+
+      state.currentVersion -= 1;
+
+      const previousVersion =
+        state.versions[state.currentVersion];
+
+      applySnapshot(state, previousVersion);
+    },
+
+
+    // Redo
+    redoMainBody: (state) => {
+      if (
+        state.currentVersion >=
+        state.versions.length - 1
+      ) {
+        return;
+      }
+
+      state.currentVersion += 1;
+
+      const nextVersion =
+        state.versions[state.currentVersion];
+
+      applySnapshot(state, nextVersion);
+    },
+  },
 });
 
-// Export actions
+
 export const {
   updateScript,
-  updateDialogScript,
-  upateEndingScene,
-  updateSceneScript,
-  updateDialogScriptSomething,
   updateMainBody,
+  updateDialogScript,
+  updateDialogScriptSomething,
+  updateSceneScript,
+  upateEndingScene,
+  updateOpeningSceneHeading,
+  updateOpeningSceneText,
   updateInitialStory,
+  updateInitialSceneHeading,
   updateEndingScene,
+  updateEndingSceneHeading,
   undoMainBody,
   redoMainBody,
-  updateInitialSceneHeading,
-  updateEndingSceneHeading,
-  updateOpeningSceneHeading,
-  updateOpeningSceneText
 } = scriptSlice.actions;
 
-// Create Redux store
+
 const store = configureStore({
   reducer: {
-    script: scriptSlice.reducer
-  }
+    script: scriptSlice.reducer,
+  },
 });
+
 
 export default store;

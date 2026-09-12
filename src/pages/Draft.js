@@ -10,7 +10,7 @@ import Flash from '../components/Flash';
 import {generateStory} from "../services/generate-story";
 
 const Draft = () => {
-  const [draftText, setDraftText] = useState('');
+  const [draftText, setDraftText] = useState('A detective investigates a murder in Berlin.');
   const [fileName, setFileName] = useState(null);
   const [fileUploaded, setFileUploaded] = useState(false);
 
@@ -88,21 +88,15 @@ const Draft = () => {
       } = data;
 
       console.log(data);
-
-      dispatch(
-        updateScript({
-          initialSceneHeading: initial_scene_heading,
-          initial_story: initial_scene_description,
-          mainBody: main_body,
-          mainBodyVersions: {
-            0: main_body
-          },
-          characters: getCharacters(main_body),
-          endingSceneHeading: ending_scene_heading,
-          endingSceneDescription: ending_scene_description,
-          setting: draftText
-        })
-      );
+dispatch(updateScript({
+  initialSceneHeading: initial_scene_heading,
+  initial_story: initial_scene_description,
+  mainBody: main_body,
+  characters: getCharacters(main_body),
+  endingSceneHeading: ending_scene_heading,
+  endingSceneDescription: ending_scene_description,
+  setting: draftText
+}));
 
       setLoading(false);
 
