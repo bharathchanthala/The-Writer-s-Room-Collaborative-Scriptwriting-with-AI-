@@ -48,7 +48,7 @@ const Write = () => {
     initialSceneHeading,
     initial_story,
     characters,
-    conversation,
+    // conversation,
     endingSceneHeading,
     endingSceneDescription,
     mainBody,
